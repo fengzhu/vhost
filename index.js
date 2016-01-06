@@ -34,6 +34,9 @@ var escapeReplace = '\\$1'
  * @public
  */
 
+// vhost cache 
+var vhosts = {};
+
 function vhost(hostname, handle) {
   if (!hostname) {
     throw new TypeError('argument hostname is required')
@@ -51,6 +54,13 @@ function vhost(hostname, handle) {
   var regexp = hostregexp(hostname)
 
   return function vhost(req, res, next) {
+
+    // check vhost cache    
+    if (vhosts[regexp]) {
+      req.vhost = vhosts[regexp].vhost;
+      return vhosts[regexp](req, res, next);
+    }
+
     var vhostdata = vhostof(req, regexp)
 
     if (!vhostdata) {
@@ -59,6 +69,10 @@ function vhost(hostname, handle) {
 
     // populate
     req.vhost = vhostdata
+    
+    // cache vhost
+    vhosts[regexp] = handle;
+    vhosts[regexp].vhost = vhostdata;
 
     // handle
     handle(req, res, next)
