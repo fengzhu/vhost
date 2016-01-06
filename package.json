@@ -1,13 +1,13 @@
 {
-  "name": "vhost",
+  "name": "vhost-cache",
   "description": "virtual domain hosting",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "contributors": [
     "Douglas Christopher Wilson <doug@somethingdoug.com>",
     "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)"
   ],
   "license": "MIT",
-  "repository": "expressjs/vhost",
+  "repository": "https://github.com/fengzhu/vhost/",
   "devDependencies": {
     "istanbul": "0.3.22",
     "mocha": "2.3.3",
